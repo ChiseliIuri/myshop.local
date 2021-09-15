@@ -13,7 +13,6 @@
  * @param string $controllerName denumirea controlerului
  * @param string $actionName denumirea functiei de prelucrare a paginii
 */
-
 function loadPage($smarty, $controllerName, $actionName = 'index'){
     include_once PathPrefix . $controllerName . PathPostfix;
     $function = $actionName . 'Action';
@@ -36,7 +35,6 @@ function loadTemplate($smarty, $templateName){
  *
  * @param variant $value переменная для вывода ее на страницу
  */
-
 function debug($value = null, $die = 1){
     echo'Debug: <br/><pre>';
     print_r($value);
@@ -50,7 +48,6 @@ function debug($value = null, $die = 1){
  * @param $rs
  * @return array|mixed
  */
-
 function createSmartyRsArray($rs){
 
     if(! $rs) return false;

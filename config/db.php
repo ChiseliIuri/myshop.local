@@ -1,5 +1,7 @@
 <?php
+
 /**
+ *
  * Initializarea conectarii la DB
  *
  */

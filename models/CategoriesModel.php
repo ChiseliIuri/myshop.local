@@ -1,6 +1,8 @@
 <?php
 /**
+ *
  * Model pentru tabelul (categories)
+ *
  */
 
 
@@ -10,7 +12,6 @@
  * @param integer $catId ID categoriei
  * @return array masiv categoriilor copil.
  */
-
 function getChildrenForCat($catId){
     $sql = "SELECT * 
     FROM categories 
