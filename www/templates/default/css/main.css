@@ -3,6 +3,10 @@ body{
     display: block;
 }
 
+a {
+    cursor: pointer;
+}
+
 .hideme{
     display: none;
 }

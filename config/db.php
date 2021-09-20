@@ -19,7 +19,7 @@ if (!$db){
     exit();
 }
 
-mysql_set_charset('utf-8');
+mysql_set_charset('utf8', $db);
 
 if(!mysql_select_db($dbName,$db)){
     echo "Eroare de acces la DB: {$dbName}";
