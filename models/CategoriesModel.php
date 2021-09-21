@@ -44,3 +44,16 @@ function getAllCatsWithChildren(){
    }
    return $smartyRs;
 }
+
+/**
+ * Primim toti copii pentru un anumit id
+ *
+ * @param $id
+ * @return array
+ */
+function getCatByID($id){
+    $sql="SELECT * FROM categories 
+          WHERE id = '$id'";
+    $rs  = mysql_query($sql);
+    return mysql_fetch_assoc($rs);
+}
