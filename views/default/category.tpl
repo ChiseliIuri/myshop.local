@@ -11,6 +11,12 @@
         {/if}
     {/foreach}
 
-    {foreach $rsChildCats as $item name = chilCats}
+    {foreach $rsChildCats as $item name = childCats}
         <h2><a href="/category/{$item['id']}/">{$item['name']}</a></h2>
     {/foreach}
+
+    {if $smarty.foreach.products.iteration == 0 && $smarty.foreach.childCats.iteration == 0}
+        <h1 style="text-align: center; color: red;">Oops produsul sau categoria nu exista. Pentru a va intoarce pe pagina principala tastati:
+            <a href="http://localhost/myshop.local/www/index.php">Home</a>
+        </h1>
+    {/if}
