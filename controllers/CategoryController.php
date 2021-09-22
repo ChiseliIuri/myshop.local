@@ -37,7 +37,7 @@ function indexAction($smarty)
     $smarty->assign('rsChildCats', $rsChildCats);
     $smarty->assign('head', $cats['name']);
 
-    loadTemplate($smarty, 'header2');
+    loadTemplate($smarty, 'header');
     loadTemplate($smarty, 'category');
     loadTemplate($smarty, 'footer');
 }
