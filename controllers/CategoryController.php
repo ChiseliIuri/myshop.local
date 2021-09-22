@@ -17,19 +17,27 @@ include_once '../models/ProductsModel.php';
  */
 function indexAction($smarty)
 {
-//    echo"Category Test";
     $catID = isset($_GET['id']) ? intval($_GET['id']) : null;
     if ($catID == null) exit();
     $cats = array();
     $cats = getCatByID($catID);
-    debug($cats);
+    $rsProducts = null;
+    $rsChildCats = null;
 
-//    $smarty->assign('rsCategories', $rsCategories);
-//    $smarty->assign('rsProducts', $rsProducts);
-//    $smarty->assign('head', 'MyShop');
-//    $smarty->assign('pageTitle', 'Principala Pagina a site-ului');
-//
-//    loadTemplate($smarty, 'header');
-//    loadTemplate($smarty, 'index');
-//    loadTemplate($smarty, 'footer');
+    if ($cats['parent_id'] == 0){
+        $rsChildCats = getChildrenForCat($catID);
+    } else {
+        $rsProducts = getProductByCat($catID);
+    }
+    $rsCategories = getAllCatsWithChildren();
+
+    $smarty->assign('rsCategories', $rsCategories);
+    $smarty->assign('cat', $cats);
+    $smarty->assign('rsProducts', $rsProducts);
+    $smarty->assign('rsChildCats', $rsChildCats);
+    $smarty->assign('head', $cats['name']);
+
+    loadTemplate($smarty, 'header2');
+    loadTemplate($smarty, 'category');
+    loadTemplate($smarty, 'footer');
 }
