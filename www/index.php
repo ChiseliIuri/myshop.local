@@ -1,5 +1,9 @@
 <?php
+session_start();
 
+//if(!){
+//
+//}
 include_once '../config/config.php'; //initializarea setarilor
 include_once '../config/db.php';
 include_once '../library/mainFunctions.php'; //Functii principale
