@@ -2,7 +2,7 @@
 <head>
     <title>{$head}</title>
     <link rel="stylesheet" href="/{$templateWebPath}/css/main.css" type="text/css"/>
-
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 </head>
 
 <body>

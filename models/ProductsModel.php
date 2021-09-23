@@ -34,3 +34,16 @@ function getProductByCat($catID){
     $rs = mysql_query($sql);
     return createSmartyRsArray($rs);
 }
+
+/**
+ * Intoarce toata info despre un anumit product dupa id-ul lui
+ *
+ * @param $prodId id-ul productului
+ * @return array|false|mixed
+ */
+function getProductById($prodId){
+    $sql = "SELECT * FROM products 
+            WHERE id = '{$prodId}'";
+    $rs = mysql_query($sql);
+    return mysql_fetch_assoc($rs);
+}
