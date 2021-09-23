@@ -19,7 +19,7 @@ define('TEMPLATE_PREFIX',"../views/{$template}/");
 define('TEMPLATE_POSTFIX','.tpl');
 
 //paths spre file-urile sablonurilor in webspace
-define('TEMPLATE_WEB_PATH',"/myshop.local/www/templates/{$template}");
+define('TEMPLATE_WEB_PATH',"templates/{$template}");
 //<
 
 //>Initializarea sablonului Smarty

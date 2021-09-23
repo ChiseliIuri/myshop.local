@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>{$head}</title>
-    <link rel="stylesheet" href="{$templateWebPath}/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="/{$templateWebPath}/css/main.css" type="text/css"/>
 
 </head>
 
