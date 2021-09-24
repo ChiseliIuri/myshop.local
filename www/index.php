@@ -1,9 +1,10 @@
 <?php
 session_start();
 
-//if(!){
-//
-//}
+//initializam variabila cosului
+if(! isset($_SESSION['cart'])){
+    $_SESSION['cart'] = array();
+}
 include_once '../config/config.php'; //initializarea setarilor
 include_once '../config/db.php';
 include_once '../library/mainFunctions.php'; //Functii principale
@@ -14,5 +15,8 @@ $controllerName = isset($_GET['controller']) ? ucfirst($_GET['controller']) : 'i
 //definim cu ce functie vom lucra:
 $actionName = isset($_GET['action']) ? $_GET['action'] : 'index';
 //d($actionName,0);git
+
+//initializam variabila shablonizatorului care contine cantitatea de elemente in cos
+$smarty->assign('cartCntItems', count($_SESSION['cart']));
 
 loadPage($smarty, $controllerName, $actionName);
