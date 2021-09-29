@@ -63,9 +63,10 @@ function indexAction($smarty){
     $rsCategories = getAllCatsWithChildren();
     $rsProducts = getProductsfromArray($itemsIds);
 
+
     $smarty->assign('pageTitle', 'Корзина');
-    $smarty->assign('pageTitle', 'Корзина');
-    $smarty->assign('pageTitle', 'Корзина');
+    $smarty->assign('rsCategories', $rsCategories);
+    $smarty->assign('rsProducts', $rsProducts);
 
     loadTemplate($smarty, 'header');
     loadTemplate($smarty, 'cart');
