@@ -27,6 +27,12 @@ function indexAction($smarty)
     if (empty($product)){
         $product = null;
     }
+
+    $smarty->assign('itemCart', 0);
+    if(in_array($prodId, $_SESSION['cart'])){
+        $smarty->assign('itemCart', 1);
+    }
+
     $smarty->assign('rsCategories', $rsCategories);
     $smarty->assign('product', $product);
     $smarty->assign('cat', $cat);
