@@ -51,3 +51,23 @@ function removefromcartAction(){
     }
     echo json_encode($resData);
 }
+
+/**
+ * Formarea paginii cosului.
+ * @link /cart/
+ * @param $smarty
+ */
+function indexAction($smarty){
+    $itemsIds = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
+
+    $rsCategories = getAllCatsWithChildren();
+    $rsProducts = getProductsfromArray($itemsIds);
+
+    $smarty->assign('pageTitle', 'Корзина');
+    $smarty->assign('pageTitle', 'Корзина');
+    $smarty->assign('pageTitle', 'Корзина');
+
+    loadTemplate($smarty, 'header');
+    loadTemplate($smarty, 'cart');
+    loadTemplate($smarty, 'footer');
+}
