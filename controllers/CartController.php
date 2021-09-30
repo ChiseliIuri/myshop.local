@@ -65,6 +65,7 @@ function indexAction($smarty){
 
 
     $smarty->assign('pageTitle', 'Корзина');
+    $smarty->assign('head', 'Cart');
     $smarty->assign('rsCategories', $rsCategories);
     $smarty->assign('rsProducts', $rsProducts);
 
