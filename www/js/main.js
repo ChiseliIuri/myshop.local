@@ -31,7 +31,7 @@ function removeFromCart(itemId) {
     console.log("js - removefromCart(" + itemId + ")");
     $.ajax({
         type: 'POST',
-        async: false,
+        // async: false,
         url: "/cart/removefromcart/" + itemId + '/',
         dataType: 'json',
         success: function (data) {
@@ -42,4 +42,17 @@ function removeFromCart(itemId) {
             }
         }
     })
+}
+
+/**
+ * Functie de calculare a pretului real
+ *
+ * @param itemId id productului
+ */
+function conversionPrice(itemId){
+    var newCnt = $('#itemCnt_'+ itemId).val();
+    var itemPrice = $('#itemPrice_'+ itemId).attr('value');
+    var itemRealPrice = newCnt * itemPrice;
+
+    $('#itemRealPrice_'+itemId).html(itemRealPrice);
 }

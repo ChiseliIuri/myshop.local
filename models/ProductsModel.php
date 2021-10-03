@@ -47,3 +47,17 @@ function getProductById($prodId){
     $rs = mysql_query($sql);
     return mysql_fetch_assoc($rs);
 }
+
+/**
+ * Primim un masiv de producte din masiv de id-uri
+ *
+ * @param $array
+ */
+function getProductsfromArray($idArray){
+    $strIds = implode($idArray, ',');
+
+    $sql = "SELECT * FROM products
+            where id in ({$strIds})";
+    $rs = mysql_query($sql);
+    return createSmartyRsArray($rs);
+}
