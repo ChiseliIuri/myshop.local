@@ -4,7 +4,7 @@
  *
  */
 
-//conectam modelelele
+//conectam modelele
 include_once '../models/CategoriesModel.php';
 include_once '../models/UsersModel.php';
 
@@ -16,6 +16,7 @@ include_once '../models/UsersModel.php';
  */
 
 function registerAction(){
+//    die("VIPOEAETSEA");
     $email = isset($_REQUEST['email']) ? $_REQUEST['email'] : null;
     $email = trim($email);
 
@@ -30,7 +31,7 @@ function registerAction(){
     $resData = null;
     $resData = checkRegisterParams($email, $pwd1, $pwd2);
 
-    if(!$resData && checkUserMail($email)){
+    if(!$resData && checkUserEmail($email)){
         $resData['success'] = false;
         $resData['message']  = "Utilizator cu asa email('$email')deja exista!";
     }
@@ -42,6 +43,7 @@ function registerAction(){
             $resData['message'] = 'Utilizatorul este cu succes inregistrat';
             $resData['success'] = 1;
 
+            //pentru a simplifica accesul catre masivul pe indexul 0 il reinscriem direct in masivul de sus
             $userData = $userData[0];
             $resData['userName']  = $userData['name'] ? $userData['name'] : $userData['email'];
             $resData['userEmail'] = $email;
@@ -53,4 +55,5 @@ function registerAction(){
             $resData['message']  = 'Eroare de inregistrare';
         }
     }
+    echo json_encode($resData);
 }
