@@ -111,7 +111,7 @@ function registerNewUser() {
                 $('#userBox').show()
 
                 //>pagina comenzii
-                // $('#loginBox').hide()
+                $('#loginBox').hide()
                 // $('#btnSaveOrder').show()
 
             } else {
@@ -143,7 +143,7 @@ function logout() {
  */
 function login() {
     let email = $('#loginEmail').val();
-    let pwd = document.getElementById('loginPwd')
+    let pwd = document.getElementById('loginPwd').value
 
     var postData = 'email=' + email + '&pwd=' + pwd;
 
@@ -235,5 +235,28 @@ function validatePwdMatch() {
         alert("Nu ati introdus emailul si prima parola!!!")
         document.getElementById('email').style.borderColor = 'red'
         document.getElementById('pwd1').style.borderColor = 'red'
+    }
+}
+
+/**
+ * Functia ce vizualizeaza campul de inregistrare
+ *
+ */
+
+//Varianta mea, fara jquery(aici trebuie de lucrat fara stil in css file, dar de declarat display in style attr)
+// function showRegisterBox(){
+//     if(document.getElementById('registerBoxHidden').style.display == 'none') {
+//         document.getElementById('registerBoxHidden').style.display = 'block';
+//     } else {
+//         document.getElementById('registerBoxHidden').style.display = 'none'
+//     }
+// }
+
+//varianta lu prof cu jquery, aici spoate de lucrat cu css file
+function showRegisterBox(){
+    if ($("#registerBoxHidden").css('display') != 'block'){
+        $("#registerBoxHidden").show()
+    } else {
+        $("#registerBoxHidden").hide()
     }
 }

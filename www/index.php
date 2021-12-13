@@ -17,6 +17,11 @@ $controllerName = isset($_GET['controller']) ? ucfirst($_GET['controller']) : 'i
 $actionName = isset($_GET['action']) ? $_GET['action'] : 'index';
 //d($actionName,0);git
 
+//Daca in sesiune exista datele despre utilizator atunci le transmitem sablonului
+if (isset($_SESSION['user'])){
+    $smarty->assign('arUser', $_SESSION['user']);
+}
+
 //initializam variabila shablonizatorului care contine cantitatea de elemente in cos
 $smarty->assign('cartCntItems', count($_SESSION['cart']));
 
