@@ -1,4 +1,5 @@
 <?php
+header("Cache-Control: no-cache, no-store,  must-revalidate");
 session_start();
 
 //initializam variabila cosului

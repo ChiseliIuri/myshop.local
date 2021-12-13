@@ -16,7 +16,6 @@ include_once '../models/UsersModel.php';
  */
 
 function registerAction(){
-//    die("VIPOEAETSEA");
     $email = isset($_REQUEST['email']) ? $_REQUEST['email'] : null;
     $email = trim($email);
 
@@ -31,12 +30,12 @@ function registerAction(){
     $resData = null;
     $resData = checkRegisterParams($email, $pwd1, $pwd2);
 
-    if(!$resData && checkUserEmail($email)){
+    if( checkUserEmail($email)){
         $resData['success'] = false;
         $resData['message']  = "Utilizator cu asa email('$email')deja exista!";
     }
 
-    if(!$resData){
+    if($resData['success'] == true){
         $pwdMD5 = md5($pwd1);
         $userData = registerNewUser($email, $pwdMD5, $name, $phone, $address);
         if($userData['success']){
@@ -54,6 +53,48 @@ function registerAction(){
             $resData['success'] = 0;
             $resData['message']  = 'Eroare de inregistrare';
         }
+    }
+    echo json_encode($resData);
+}
+
+/**
+ * Delogarea utilizatorului
+ *
+ */
+function logoutAction(){
+    if (isset($_SESSION['user'])){
+        unset($_SESSION['user']);
+        unset($_SESSION['cart']);
+    }
+//    redirect('/');
+}
+
+/**
+ * AJAX autorizarea utilizatorului
+ *
+ * @returns json masiv cu datele utilizatorului
+ */
+
+function loginAction(){
+    $email = isset($_REQUEST['email']) ? $_REQUEST['email'] : null;
+    $email = trim($email);
+
+    $pwd = isset($_REQUEST['pwd']) ? $_REQUEST['pwd'] : null;
+    $pwd = trim($pwd);
+
+    $userData = loginUser($email, $pwd);
+
+    if($userData['success']){
+        $userData = $userData[0];
+
+        $_SESSION['user'] = $userData;
+        $_SESSION['user']['displayName'] = $userData['name'] ? $userData['name'] : $userData['email'];
+
+        $resData = $_SESSION['user'];
+        $resData['success'] = 1;
+    } else {
+        $resData['success'] = 0;
+        $resData['message'] = 'Loghin sau Parola incorecta';
     }
     echo json_encode($resData);
 }

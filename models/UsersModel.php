@@ -22,7 +22,7 @@ function registerNewUser($email, $pwdMD5, $name, $phone, $address)
     $email = htmlspecialchars(mysql_real_escape_string($email));
     $name = htmlspecialchars(mysql_real_escape_string($name));
     $phone = htmlspecialchars(mysql_real_escape_string($phone));
-    $adress = htmlspecialchars(mysql_real_escape_string($address));
+    $address = htmlspecialchars(mysql_real_escape_string($address));
     //sql query
     $sql = "
     insert into users (`email`, `pwd`, `name`, `phone`, `address`) 
@@ -32,12 +32,10 @@ function registerNewUser($email, $pwdMD5, $name, $phone, $address)
     if ($rs) {
         $sql = "
         SELECT * FROM users 
-        WHERE (`email` = {'$email'} and `pwd` = {'$pwdMD5'})
+        WHERE (`email` = '{$email}' and `pwd` = '{$pwdMD5}')
         LIMIT 1;";
-
         $rs = mysql_query($sql);
         $rs = createSmartyRsArray($rs);
-
         if (isset($rs[0])) {
             $rs['success'] = 1;
         } else {
@@ -59,22 +57,23 @@ function registerNewUser($email, $pwdMD5, $name, $phone, $address)
  */
 
 function checkRegisterParams($email, $pwd1, $pwd2){
-    $res = null;
+    $res['success'] = true;
+    $res['message'] = "";
     if (!$email){
         $res['success'] = false;
-        $res['message']  = 'Introduceti email-ul';
+        $res['message']  .= 'Introduceti email-ul ';
     }
     if (!$pwd1){
         $res['success'] = false;
-        $res['message']  = 'Introduceti parola';
+        $res['message']  .= 'Introduceti parola ';
     }
-    if (!$pwd2){
+    if (!$pwd2 && $pwd1){
         $res['success'] = false;
-        $res['message']  = 'Introduceti parola repetat';
+        $res['message']  .= 'Introduceti parola repetat ';
     }
     if ($pwd1 != $pwd2){
         $res['success'] = false;
-        $res['message']  = 'Parolele NU conincid!';
+        $res['message']  .= 'Parolele NU conincid! ';
     }
     return $res;
 }
@@ -90,5 +89,33 @@ function checkUserEmail($email){
     $sql = "SELECT id FROM users WHERE email =  '{$email}'";
     $rs = mysql_query($sql);
     $rs = createSmartyRsArray($rs);
+    return $rs;
+}
+
+/**
+ * Autorizarea utilizatorului
+ *
+ * @param string $email posta (login)
+ * @param string $pwd parola
+ * @return array masiv de date a utilizatorului
+ */
+
+function loginUser($email, $pwd){
+    $email = htmlspecialchars(mysql_real_escape_string($email));
+    $pwd = md5($pwd);
+
+    $sql = "SELECT * FROM users 
+            WHERE (`email` = '{$email}' and `pwd` = '{$pwd}')
+            LIMIT 1";
+
+    $rs = mysql_query($sql);
+    $rs = createSmartyRsArray($rs);
+
+    if (isset($rs[0])){
+        $rs['success']  = 1;
+    } else {
+        $rs['success'] = 0;
+    }
+
     return $rs;
 }
