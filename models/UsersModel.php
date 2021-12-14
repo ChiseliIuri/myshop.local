@@ -147,17 +147,19 @@ function updateUserData($name, $phone, $address, $pwd1, $pwd2, $curPwd){
     $sql = "UPDATE users SET";
 
     if ($newPwd){
-        $sql .= "`pwd` = '{$newPwd}'";
+        $sql .= "`pwd` = '{$newPwd}',";
     }
 
     $sql .= "
     `name` ='{$name}',
     `phone` ='{$phone}',
-    `address`='{$address}',
+    `address`='{$address}'
     WHERE
     `email`='{$email}' AND `pwd`='{$curPwd}'
     LIMIT 1;
     ";
+
+//    debug($sql,0);
     $rs = mysql_query($sql);
     return $rs;
 }

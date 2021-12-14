@@ -150,7 +150,9 @@ function updateAction(){
         echo json_encode($resData);
         return false;
     }
-    $res = updateUserData($name ,$phone, $address, $pwd1, $pwd2, $curPwd);
+
+    $res = updateUserData($name ,$phone, $address, $pwd1, $pwd2, $curPwdMD5);
+
     if ($res){
         $resData['success'] = true;
         $resData['message'] = 'Saved data';
@@ -159,7 +161,7 @@ function updateAction(){
         $_SESSION['user']['name'] = $name;
         $_SESSION['user']['phone'] = $phone;
         $_SESSION['user']['address'] = $address;
-        $_SESSION['user']['pwd'] = $curPwdMD5;
+        $_SESSION['user']['pwd'] = md5($pwd1);
         $_SESSION['user']['displayName'] = $name ? $name : $_SESSION['user']['email'];
     } else {
         $resData['success'] = false;

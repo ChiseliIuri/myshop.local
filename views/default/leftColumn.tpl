@@ -16,8 +16,8 @@
 
     {if isset($arUser)}
         <div id="userBox">
-            <a href="#" id="userLink">{$arUser['displayName']}</a><br/>
-            <a href="#" onclick="logout();">Exit</a>
+            <a href="/user/" id="userLink">{$arUser['displayName']}</a><br/>
+            <span style="text-decoration: underline; color: red; cursor: pointer;" onclick="logout();">Exit</span>
         </div>
     {else}
         <div id="userBox" class="hideme">

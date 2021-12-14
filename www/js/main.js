@@ -5,7 +5,6 @@
  * @return in caz de success se reainoiesc datele despre produs pe pagina
  */
 function addToCart(itemId) {
-    console.log("js - addtoCart()");
     $.ajax({
         type: 'POST',
         // async: false,
@@ -68,7 +67,6 @@ function calcGenSum(itemsIds) {
         sum = sum + parseInt(document.getElementById('itemRealPrice_' + element).textContent)
     })
     document.getElementById('genSum').innerHTML = sum
-    console.log(sum)
 }
 
 /**
@@ -130,10 +128,10 @@ function updateUserData(){
     console.log("js - updateUserdata()");
     let phone = $('#newPhone').val();
     let address = $('#newAddress').val();
-    let pwd1 = $('#newPwd1');
-    let pwd2 = $('#newPwd2');
-    let curPwd = $('#curPwd');
-    let name = $('#newName');
+    let pwd1 = $('#newPwd1').val();
+    let pwd2 = $('#newPwd2').val();
+    let curPwd = $('#curPwd').val();
+    let name = $('#newName').val();
 
     let postData = {
         phone: phone,
@@ -143,15 +141,21 @@ function updateUserData(){
         curPwd: curPwd,
         name: name
     };
+    console.log(postData)
 
     $.ajax({
         type: 'POST',
         async: false,
-        url: '/user/update',
+        url: '/user/update/',
         data: postData,
         dataType: 'json',
         success: function (data) {
-
+            if (data['success']){
+                $('#userLink').html(data['userName'])
+                alert(data['message'])
+            } else {
+                alert(data['message'])
+            }
         }
     })
 }
@@ -173,7 +177,6 @@ function logout() {
 
 /**
  * Logarea utilizatorului
- *
  *
  */
 function login() {
