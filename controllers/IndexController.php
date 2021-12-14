@@ -25,7 +25,7 @@ function indexAction($smarty){
     $rsCategories = getAllCatsWithChildren();
     $rsProducts = getLastProduct(16);
 
-    $smarty->assign('rand', rand());
+
     $smarty->assign('rsCategories', $rsCategories);
     $smarty->assign('rsProducts', $rsProducts);
     $smarty->assign('head', 'MyShop');

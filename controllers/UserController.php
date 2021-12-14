@@ -98,3 +98,73 @@ function loginAction(){
     }
     echo json_encode($resData);
 }
+
+/**
+ * Formarea paginii principale a utilizatorului
+ *
+ * @link /user/
+ * @param object $smarty sablonizator
+ */
+
+function indexAction($smarty){
+    if(!isset ($_SESSION['user'])){
+        redirect('/');
+    }
+
+    //Primim lista categoriilor pentru menu
+    $rsCategories = getAllCatsWithChildren();
+
+    $smarty->assign('pageTitle', 'User Page');
+    $smarty->assign('rsCategories', $rsCategories);
+
+    loadTemplate($smarty,'header');
+    loadTemplate($smarty,'user');
+    loadTemplate($smarty,'footer');
+}
+
+/**
+ * Reinoirea datelor utilizatorului
+ *
+ * @return json rezultat a executarii functiei
+ */
+
+function updateAction(){
+    if(!isset($_SESSION['user'])){
+        redirect('/');
+    }
+
+    //>Initializarea variabililor
+    $resData = array();
+    $phone = isset($_REQUEST['phone']) ? $_REQUEST['phone'] : null;
+    $address = isset($_REQUEST['address']) ? $_REQUEST['address'] : null;
+    $name = isset($_REQUEST['name']) ? $_REQUEST['name'] : null;
+    $pwd1 = isset($_REQUEST['pwd1']) ? $_REQUEST['pwd1'] : null;
+    $pwd2 = isset($_REQUEST['pwd2']) ? $_REQUEST['pwd2'] : null;
+    $curPwd = isset($_REQUEST['curPwd']) ? $_REQUEST['curPwd'] : null;
+    //<
+
+    $curPwdMD5 = md5($curPwd);
+    if (!$curPwd || ($_SESSION['user']['pwd']) != $curPwdMD5){
+        $resData['success'] = false;
+        $resData['message'] = 'Parola curent nu este corecta';
+        echo json_encode($resData);
+        return false;
+    }
+    $res = updateUserData($name ,$phone, $address, $pwd1, $pwd2, $curPwd);
+    if ($res){
+        $resData['success'] = true;
+        $resData['message'] = 'Saved data';
+        $resData['userName'] = $name;
+
+        $_SESSION['user']['name'] = $name;
+        $_SESSION['user']['phone'] = $phone;
+        $_SESSION['user']['address'] = $address;
+        $_SESSION['user']['pwd'] = $curPwdMD5;
+        $_SESSION['user']['displayName'] = $name ? $name : $_SESSION['user']['email'];
+    } else {
+        $resData['success'] = false;
+        $resData['message'] = "Ieroare de salvare a datelor";
+    }
+
+    echo json_encode($resData);
+}

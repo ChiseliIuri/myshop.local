@@ -122,6 +122,41 @@ function registerNewUser() {
 }
 
 /**
+ * Update dates of user
+ *
+ *
+ */
+function updateUserData(){
+    console.log("js - updateUserdata()");
+    let phone = $('#newPhone').val();
+    let address = $('#newAddress').val();
+    let pwd1 = $('#newPwd1');
+    let pwd2 = $('#newPwd2');
+    let curPwd = $('#curPwd');
+    let name = $('#newName');
+
+    let postData = {
+        phone: phone,
+        address: address,
+        pwd1: pwd1,
+        pwd2: pwd2,
+        curPwd: curPwd,
+        name: name
+    };
+
+    $.ajax({
+        type: 'POST',
+        async: false,
+        url: '/user/update',
+        data: postData,
+        dataType: 'json',
+        success: function (data) {
+
+        }
+    })
+}
+
+/**
  * Delogarea utilizatorului
  *
  */
@@ -253,10 +288,28 @@ function validatePwdMatch() {
 // }
 
 //varianta lu prof cu jquery, aici spoate de lucrat cu css file
+// function showRegisterBox(){
+//     if ($("#registerBoxHidden").css('display') != 'block'){
+//         $("#registerBoxHidden").show()
+//     } else {
+//         $("#registerBoxHidden").hide()
+//     }
+// }
+
+//Varianta din comenturi
 function showRegisterBox(){
-    if ($("#registerBoxHidden").css('display') != 'block'){
-        $("#registerBoxHidden").show()
-    } else {
-        $("#registerBoxHidden").hide()
-    }
+    $("#registerBoxHidden").toggle()
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

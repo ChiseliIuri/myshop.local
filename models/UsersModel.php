@@ -119,3 +119,45 @@ function loginUser($email, $pwd){
 
     return $rs;
 }
+
+/**
+ * Modify user data
+ *
+ * @param string $name numele utilizatorului
+ * @param string $phone telefon
+ * @param string $address adresa
+ * @param string $pwd1 prima introducere a parolei noi
+ * @param string $pwd2 2 a doua introducere a parolei noi
+ * @param string $curPwd parola veche
+ * @returns boolean TRUE in caz de success
+ */
+function updateUserData($name, $phone, $address, $pwd1, $pwd2, $curPwd){
+    $email = htmlspecialchars(mysql_real_escape_string($_SESSION['user']['email']));
+    $name = htmlspecialchars(mysql_real_escape_string($name));
+    $phone = htmlspecialchars(mysql_real_escape_string($phone));
+    $address = htmlspecialchars(mysql_real_escape_string($address));
+    $pwd1 = trim($pwd1);
+    $pwd2 = trim($pwd2);
+
+    $newPwd = null;
+    if ($pwd1 && ($pwd1 == $pwd2)){
+        $newPwd = md5($pwd1);
+    }
+
+    $sql = "UPDATE users SET";
+
+    if ($newPwd){
+        $sql .= "`pwd` = '{$newPwd}'";
+    }
+
+    $sql .= "
+    `name` ='{$name}',
+    `phone` ='{$phone}',
+    `address`='{$address}',
+    WHERE
+    `email`='{$email}' AND `pwd`='{$curPwd}'
+    LIMIT 1;
+    ";
+    $rs = mysql_query($sql);
+    return $rs;
+}

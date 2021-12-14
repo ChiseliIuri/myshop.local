@@ -21,7 +21,8 @@ $actionName = isset($_GET['action']) ? $_GET['action'] : 'index';
 if (isset($_SESSION['user'])){
     $smarty->assign('arUser', $_SESSION['user']);
 }
-
+//Initializam variabila smarty ce contine versiunea aleatorie pentru incarcarea instantanee a css fileului
+$smarty->assign('rand', rand());
 //initializam variabila shablonizatorului care contine cantitatea de elemente in cos
 $smarty->assign('cartCntItems', count($_SESSION['cart']));
 
