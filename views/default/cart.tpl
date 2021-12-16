@@ -20,7 +20,7 @@
                 <td>{$smarty.foreach.products.iteration}</td>
                 <td><a href="/product/{$item['id']}/">{$item['name']}</a></td>
                 <td><input name="itemCnt_{{$item['id']}}" id="itemCnt_{$item['id']}" type="text" value=1
-                           onchange="conversionPrice({$item['id']});"/>
+                           onchange="conversionPrice({$item['id']}); calcGenSum({$itemsIds});"/>
                 </td>
                 <td><span id="itemPrice_{$item['id']}" value="{$item['price']}">
                         {$item['price']}
@@ -39,7 +39,7 @@
             </td>
             <td align="right" colspan="4">
                 <div id="genSum">
-                    сумма
+                    {$sum}
                 </div>
             </td>
             <td></td>

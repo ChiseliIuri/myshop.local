@@ -43,3 +43,13 @@ a {
 .cartBox{
     padding: 5px 0px 5px 0px
 }
+
+#registerBoxHidden {
+    display: none;
+}
+
+.showHidden{
+    text-decoration: underline;
+    color: green;
+    cursor: pointer;
+}

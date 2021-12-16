@@ -58,7 +58,16 @@ function createSmartyRsArray($rs){
     }
     return $smartyRs;
 }
-
+/**
+ * Redirect
+ *
+ * @param string url
+ */
+function redirect($url){
+    if(!$url) $url = '/';
+    header("Location: {$url}");
+    exit;
+}
 
 
 

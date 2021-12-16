@@ -37,12 +37,13 @@ function addtocartAction()
  * @param integer id GET parametru - id-ul produsului adaugat
  * @return json informatia despre operatiune (succes, cantitatea de elemente in cos)
  */
-function removefromcartAction(){
+function removefromcartAction()
+{
     $itemId = isset($_GET['id']) ? intval($_GET['id']) : null;
     if (!$itemId) exit();
     $resData = array();
     $key = array_search($itemId, $_SESSION['cart']);
-    if ($key!==false){
+    if ($key !== false) {
         unset($_SESSION['cart'][$key]);
         $resData['success'] = 1;
         $resData['cntItems'] = count($_SESSION['cart']);
@@ -57,17 +58,28 @@ function removefromcartAction(){
  * @link /cart/
  * @param $smarty
  */
-function indexAction($smarty){
+function indexAction($smarty)
+{
     $itemsIds = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
 
     $rsCategories = getAllCatsWithChildren();
     $rsProducts = getProductsfromArray($itemsIds);
 
+    //Calculam suma preturilor produselor alese
 
+    $sum = 0;
+    if (!empty($rsProducts)) {
+        for ($i = 0; $i <= sizeof($rsProducts) - 1; $i++) {
+            $sum = $sum + $rsProducts[$i]['price'];
+        }
+    }
+    $itemsIds = json_encode($itemsIds);
     $smarty->assign('pageTitle', 'Корзина');
     $smarty->assign('head', 'Cart');
     $smarty->assign('rsCategories', $rsCategories);
     $smarty->assign('rsProducts', $rsProducts);
+    $smarty->assign('sum', $sum);
+    $smarty->assign('itemsIds',$itemsIds);
 
     loadTemplate($smarty, 'header');
     loadTemplate($smarty, 'cart');
