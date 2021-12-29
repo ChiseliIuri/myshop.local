@@ -27,7 +27,6 @@ function addToCart(itemId) {
  * @return in caz de success se reainoiesc datele despre produs pe pagina
  */
 function removeFromCart(itemId) {
-    console.log("js - removefromCart(" + itemId + ")");
     $.ajax({
         type: 'POST',
         // async: false,
@@ -78,7 +77,6 @@ function getData(obj_form) {
     $('input, textarea, select', obj_form).each(function () {
         if (this.name && this.name != '') {
             hData[this.name] = this.value;
-            console.log('hData[' + this.name + '] = ' + hData[this.name])
         }
     })
     return hData
@@ -111,6 +109,7 @@ function registerNewUser() {
                 //>pagina comenzii
                 $('#loginBox').hide()
                 // $('#btnSaveOrder').show()
+                document.getElementById('btnSaveOrder').style.display='block';
 
             } else {
                 alert(data['message'])
@@ -199,6 +198,10 @@ function login() {
                 $('#userLink').attr('href', '/user/')
                 $('#userLink').html(data['displayName'])
                 $('#userBox').show()
+                document.getElementById('name').value = data['name'];
+                document.getElementById('phone').value = data['phone'];
+                document.getElementById('address').value = data['address'];
+                document.getElementById('btnSaveOrder').style.display='block';
             } else{
                 alert(data['message']);
             }
@@ -304,6 +307,28 @@ function showRegisterBox(){
     $("#registerBoxHidden").toggle()
 }
 
+/**
+ * Salvarea comenzii
+ *
+ */
+function saveOrder(){
+    var postData = getData('form')
+    $.ajax({
+        type: 'POST',
+        async: false,
+        url: "/cart/saveorder/",
+        data: postData,
+        dataType: 'json',
+        success: function(data){
+            if (data['success']){
+                alert(data['message'])
+                document.location = '/';
+            } else {
+                alert(data['message']);
+            }
+        }
+    })
+}
 
 
 
