@@ -24,3 +24,26 @@ function setPurchaseForOrder($orderId, $cart){
 
     return $rs;
 }
+
+/**
+ * Get product data by order id
+ *
+ * @param $orderId
+ * @return array array of products
+ */
+function getPurchaseForOrder($orderId){
+    $sql = "
+        SELECT `pe`.*, `ps`.name
+        FROM purchase as `pe`
+        JOIN products as ps
+        ON pe.product_id = ps.id
+        WHERE pe.order_id = {$orderId};
+    ";
+    $rs = mysql_query($sql);
+
+    $purchases = array();
+    while($row = mysql_fetch_assoc($rs)){
+        $purchases[]= $row;
+    }
+    return $purchases;
+}

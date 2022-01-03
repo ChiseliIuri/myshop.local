@@ -330,6 +330,16 @@ function saveOrder(){
     })
 }
 
+/**
+ * Show product under-table in orders table
+ *
+ * @param item
+ */
+function showProducts(item){
+    // document.getElementById('purchaseForOrderId_'+item).style.display = 'block';
+    $("#purchaseForOrderId_" + item).toggle()
+}
+
 
 
 

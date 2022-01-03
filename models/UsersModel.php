@@ -163,3 +163,23 @@ function updateUserData($name, $phone, $address, $pwd1, $pwd2, $curPwd){
     $rs = mysql_query($sql);
     return $rs;
 }
+
+/**
+ * Primirea datelor comenzilor utilizatorului curent
+ *
+ * @return array masivul comenzilor cu conexiune spre producte
+ */
+function getCurUserOrders(){
+    $userId = isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 0;
+    $rs = getOrdersWithProductsByUser($userId);
+
+    return $rs;
+}
+
+
+
+
+
+
+
+

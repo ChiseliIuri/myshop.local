@@ -7,6 +7,8 @@
 //conectam modelele
 include_once '../models/CategoriesModel.php';
 include_once '../models/UsersModel.php';
+include_once '../models/OrdersModel.php';
+include_once '../models/PurchaseModel.php';
 
 /**
  * AJAX inregistrarea userului
@@ -114,9 +116,13 @@ function indexAction($smarty){
     //Primim lista categoriilor pentru menu
     $rsCategories = getAllCatsWithChildren();
 
+    //primim lista comenzilor utilizatorului
+    $rsUserOrders = getCurUserOrders();
+
     $smarty->assign('pageTitle', 'User Page');
     $smarty->assign('head', 'User Page');
     $smarty->assign('rsCategories', $rsCategories);
+    $smarty->assign('rsUserOrders', $rsUserOrders);
 
     loadTemplate($smarty,'header');
     loadTemplate($smarty,'user');
