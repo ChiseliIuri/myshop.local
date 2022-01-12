@@ -1,4 +1,4 @@
-<h1>Товары Категории {$cat['name']}</h1>
+<h3>Товары Категории {$cat['name']}</h3>
     {foreach $rsProducts as $item name = products}
         <div style="float:left; padding: 0px 30px 40px 0px;">
             <a href="/product/{$item['id']}/">
@@ -16,7 +16,7 @@
     {/foreach}
 
     {if $smarty.foreach.products.iteration == 0 && $smarty.foreach.childCats.iteration == 0}
-        <h1 style="text-align: center; color: red;">Oops produsul sau categoria nu exista. Pentru a va intoarce pe pagina principala tastati:
+        <h2 style="text-align: center; color: red;">Oops produsul sau categoria nu exista. Pentru a va intoarce pe pagina principala tastati:
             <a href="/">Home</a>
-        </h1>
+        </h2>
     {/if}

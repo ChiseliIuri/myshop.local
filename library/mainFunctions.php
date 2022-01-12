@@ -46,7 +46,7 @@ function debug($value = null, $die = 1){
  *Преобразование результата работы функции выборки в ассоциативный массив
  *
  * @param $rs
- * @return array|mixed
+ * @return array
  */
 function createSmartyRsArray($rs){
 

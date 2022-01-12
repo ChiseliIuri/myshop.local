@@ -1,7 +1,7 @@
-<h1>{$cat['name']}</h1>
+<h2>{$cat['name']}</h2>
 {if isset($product)}
     <div style="text-align: center;">
-        <h2>{$product['name']}</h2>
+        <h3>{$product['name']}</h3>
         <img src="/images/products/{$product['image']}" alt="{$product['image']}"><br/>
         {$product['description']}<br/><br/>
         PRICE: <span style="color: red;">{$product['price']}</span> RUB<br/><br/><br/>

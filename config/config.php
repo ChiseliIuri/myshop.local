@@ -13,13 +13,16 @@ define('PathPostfix', 'Controller.php');
 
 //> sablonul folosit
 $template = 'default';
+$templateAdmin = 'admin';
 
 // Constante ce definesc suf si pref a Paths spre file-urile sablonurilor(*.tpl)
 define('TEMPLATE_PREFIX',"../views/{$template}/");
+define('TEMPLATE_ADMIN_PREFIX',"../views/{$templateAdmin}/");
 define('TEMPLATE_POSTFIX','.tpl');
 
 //paths spre file-urile sablonurilor in webspace
 define('TEMPLATE_WEB_PATH',"templates/{$template}");
+define('TEMPLATE_ADMIN_WEB_PATH',"templates/{$templateAdmin}");
 //<
 
 //>Initializarea sablonului Smarty

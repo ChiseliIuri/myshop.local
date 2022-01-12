@@ -61,3 +61,12 @@ function getProductsfromArray($idArray){
     $rs = mysql_query($sql);
     return createSmartyRsArray($rs);
 }
+
+/**
+ * Get full data of all products
+ *
+ * @return array|false
+ */
+function getProducts(){
+    return createSmartyRsArray(mysql_query("SELECT * from produtcs ORDER BY category_id"));
+}
