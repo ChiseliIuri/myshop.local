@@ -26,3 +26,59 @@
         </td>
     </tr>
 </table>
+
+<table border="1" cellspacing="1" cellpadding="1">
+    <caption>Edit</caption>
+    <tr>
+        <th>№</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Delete</th>
+        <th>Picture</th>
+        <th>Save</th>
+    </tr>
+    {foreach $rsProducts as $item name=products}
+        <tr>
+            <td>{$smarty.foreach.products.iteration}</td>
+            <td>{$item['id']}</td>
+            <td>
+                <input type="edit" id="itemName_{$item['id']}" value="{$item['name']}">
+            </td>
+            <td>
+                <input type="edit" id="itemPrice_{$item['id']}" value="{$item['price']}">
+            </td>
+            <td>
+                <select id="itemCatId_{$item['id']}">
+                    <option value="0">Main category
+                    {foreach $rsCategories as $itemCat}
+                        <option value="{$itemCat['id']}" {if $item['category_id'] == $itemCat['id']}selected="selected"{/if}>{$itemCat['name']}
+                    {/foreach}
+                </select>
+            </td>
+            <td>
+                <textarea id="itemDesc_{$item['id']}">
+                    {$item['description']}
+                </textarea>
+            </td>
+            <td>
+                <input type="checkbox" id="itemStatus_{$item['id']}" {if $item['status'] == 0} checked {/if}>{$item['status']}
+            </td>
+            <td>
+                {if $item['image']}
+                    <img src="/images/products/{$item['image']}" width="100">
+                {/if}
+                <form action="/admin/upload/" method="post" enctype="multipart/form-data">
+                    <input type="file" name="filename">
+                    <input type="hidden" name="itemId" value="{$item['id']}">
+                    <input type="submit" value="Upload">
+                </form>
+            </td>
+            <td>
+                <input type="button" value="Save" onclick="updateProduct('{$item['id']}');">
+            </td>
+        </tr>
+    {/foreach}
+</table>

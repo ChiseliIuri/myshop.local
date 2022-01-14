@@ -55,3 +55,67 @@ function updateCat(catId){
         }
     });
 }
+
+/**
+ * Add new product
+ *
+ */
+function addProduct(){
+    let postData = {
+        itemName: $('#newItemName').val(),
+        itemPrice: $('#newItemPrice').val(),
+        itemCatId: $('#newItemCatId').val(),
+        itemDesc: $('#newItemDesc').val()
+    }
+
+    $.ajax({
+        type: 'POST',
+        async: false,
+        url: '/admin/addproduct/',
+        data: postData,
+        dataType: 'json',
+        success: function (data) {
+            alert(data['message'])
+            if (data['success']) {
+                $('#newItemName').val('')
+                $('#newItemPrice').val('')
+                $('#newItemCatId').val('')
+                $('#newItemDesc').val('')
+            }
+        }
+    })
+}
+
+/**
+ * Update product Data
+ *
+ * @param itemId
+ */
+function updateProduct(itemId){
+    let itemStatus = $('#itemStatus_' + itemId).val();
+    console.log(itemStatus)
+    if(!itemStatus){
+        itemStatus = 1
+    } else {
+        itemStatus = 0
+    }
+    let postData = {
+        itemId: itemId,
+        itemName: $('#itemName_' + itemId).val(),
+        itemPrice: $('#itemPrice_' + itemId).val(),
+        itemCatId: $('#itemCatId_' + itemId).val(),
+        itemDesc: $('#itemDesc_' + itemId).val(),
+        itemStatus: itemStatus,
+    }
+    $.ajax({
+        type: 'POST',
+        async: false,
+        url: '/admin/updateproduct/',
+        data: postData,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data['message'])
+            alert(data['message'])
+        }
+    })
+}

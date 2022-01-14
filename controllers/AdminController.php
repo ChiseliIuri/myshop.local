@@ -108,3 +108,51 @@ function productsAction($smarty){
     loadTemplate($smarty, 'adminProducts');
     loadTemplate($smarty, 'adminFooter');
 }
+
+/**
+ * Add new product
+ *
+ * @return json array
+ */
+function addproductAction(){
+    $itemName = $_POST['itemName'];
+    $itemPrice = $_POST['itemPrice'];
+    $itemDesc = $_POST['itemDesc'];
+    $itemCat = $_POST['itemCatId'];
+
+    if (insertProduct($itemName, $itemPrice, $itemDesc, $itemCat)){
+        $resData['success'] = 1;
+        $resData['message'] = 'Changes was successful introduced';
+    } else {
+        $resData['success'] = 0;
+        $resData['message'] = 'Some error occurred during introducing data';
+    }
+    echo json_encode($resData);
+    return;
+}
+
+/**
+ * Update product data
+ *
+ * @return json array
+ */
+function updateproductAction(){
+    $itemId = $_POST['itemId'];
+    $itemName = $_POST['itemName'];
+    $itemPrice = $_POST['itemPrice'];
+    $itemStatus = $_POST['itemStatus'];
+    $itemDesc = $_POST['itemDesc'];
+    $itemCat = $_POST['itemCatId'];
+
+    $res = updateProduct($itemId, $itemName, $itemPrice, $itemStatus, $itemDesc, $itemCat);
+
+    if ($res){
+        $resData['success'] = 1;
+        $resData['message'] = "Updated with success;";
+    } else {
+        $resData['success'] = 0;
+        $resData['message'] = "Some Error occurred!";
+    }
+    echo json_encode($resData);
+    return;
+}
