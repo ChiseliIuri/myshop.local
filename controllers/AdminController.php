@@ -227,7 +227,7 @@ function setorderstatusAction(){
  * Set Order Date Payment
  *
  */
-function setOrderDatePaymentAction(){
+function setorderdatePaymentAction(){
     $itemId = $_POST['itemId'];
     $datePayment = $_POST['datePayment'];
 

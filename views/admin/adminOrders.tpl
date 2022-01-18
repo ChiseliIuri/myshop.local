@@ -27,7 +27,8 @@
                 </td>
                 <td>{$item['date_created']}</td>
                 <td>
-                    <input type="date" id="datePayment_{$item['id']}" value="{$item['date_payment']}">
+                    <input {if $item['date_payment']} placeholder="{$item['date_payment']}" {else} placeholder="Enter Date" {/if}type="text" onfocus="(this.type='date')" id="datePayment_{$item['id']}">
+                    <!-- <input type="date" id="datePayment_{$item['id']}" value="{$item['date_payment']}"> -->
                     <input type="button" value="Save" onclick="updateDatePayment('{$item['id']}')">
                 </td>
                 <td>{$item['comment']}</td>

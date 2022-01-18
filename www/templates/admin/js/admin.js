@@ -163,3 +163,24 @@ function updateOrderStatus(itemId){
         }
     })
 }
+
+
+
+function updateDatePayment(itemId){
+    let date = $('#datePayment_' + itemId).val()
+    console.log(date)
+    let postData = {itemId: itemId, datePayment: date}
+
+    $.ajax({
+        type: 'POST',
+        async: false,
+        url: '/admin/setorderdatepayment/',
+        data: postData,
+        dataType: 'json',
+        success: function(data){
+            if(!data['success']){
+                alert(data['message'])
+            }
+        }
+    })
+}
