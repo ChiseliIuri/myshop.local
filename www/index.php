@@ -27,4 +27,3 @@ $smarty->assign('rand', rand());
 $smarty->assign('cartCntItems', count($_SESSION['cart']));
 
 loadPage($smarty, $controllerName, $actionName);
-//testComment

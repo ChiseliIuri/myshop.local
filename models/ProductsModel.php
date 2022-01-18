@@ -132,3 +132,14 @@ function updateProduct($itemId, $itemName, $itemPrice, $itemStatus, $itemDesc, $
 //    debug($sql);
     return mysql_query($sql);
 }
+
+/**
+ * Update product image filename
+ *
+ * @param $itemId
+ * @param $newFileName
+ * @return bool|resource
+ */
+function updateProductImage($itemId, $newFileName){
+    return updateProduct($itemId, null, null, null,null, null, $newFileName);
+}

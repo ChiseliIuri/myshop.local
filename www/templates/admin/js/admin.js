@@ -2,6 +2,11 @@
  * Js funcitons for admin page
  */
 
+// window.onload = function () {
+//     document.getElementById()
+// }
+
+
 /**
  *Ajax function for adding new category
  */
@@ -92,13 +97,14 @@ function addProduct(){
  * @param itemId
  */
 function updateProduct(itemId){
-    let itemStatus = $('#itemStatus_' + itemId).val();
-    console.log(itemStatus)
+    let itemStatus = $('#itemStatus_'+itemId).prop('checked');
+
     if(!itemStatus){
         itemStatus = 1
     } else {
         itemStatus = 0
     }
+
     let postData = {
         itemId: itemId,
         itemName: $('#itemName_' + itemId).val(),
@@ -116,6 +122,44 @@ function updateProduct(itemId){
         success: function (data) {
             console.log(data['message'])
             alert(data['message'])
+            window.location.replace("/admin/products/")
+        }
+    })
+}
+
+/**
+ * Show product under-table in orders table
+ *
+ * @param item
+ */
+function showProducts(item){
+    $("#purchaseForOrderId_" + item).toggle()
+}
+
+/**
+ * Ajax for update order status
+ *
+ * @param itemId
+ */
+function updateOrderStatus(itemId){
+    let itemStatus = $('#itemStatus_'+itemId).prop('checked');
+    if (itemStatus){
+        itemStatus = 1;
+    } else {
+        itemStatus = 0;
+    }
+
+    let postData = {itemId: itemId, status: itemStatus}
+    $.ajax({
+        type: 'POST',
+        async: false,
+        url: '/admin/setorderstatus/',
+        data: postData,
+        dataType: 'json',
+        success: function (data) {
+            if (!data['success']){
+                alert(data['message'])
+            }
         }
     })
 }

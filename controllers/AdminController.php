@@ -156,3 +156,87 @@ function updateproductAction(){
     echo json_encode($resData);
     return;
 }
+
+/**
+ * Uploading image
+ *
+ */
+function uploadAction(){
+    $maxSize = 2 * 1024 * 1024;
+    $itemId = $_POST['itemId'];
+    //primim extensia fileului incarcabil
+    $ext = pathinfo($_FILES['filename']['name'], PATHINFO_EXTENSION);
+    //cream denumirea fileului
+    $newFileName = $itemId . '.' . $ext;
+
+    if ($_FILES['filename']['size']>$maxSize){
+        echo ('File size exceeds 2 MB');
+        return;
+    }
+
+    //controlam daca fileul este incarcat
+    if (is_uploaded_file($_FILES['filename']['tmp_name'])){
+        //daca fileul este incarcat il mutam din directoria teporara in directoria finala
+        $res = move_uploaded_file($_FILES['filename']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/images/products/' . $newFileName);
+        if ($res){
+            $res = updateProductImage($itemId, $newFileName);
+            if ($res) {
+                redirect('/admin/products/');
+            }
+        }
+    } else {
+        echo ("Error of loading file");
+    }
+}
+
+/**
+ * Main controller for order page
+ *
+ * @param $smarty
+ */
+function ordersAction($smarty){
+    $rsOrders = getOrders();
+
+    $smarty->assign('rsOrders', $rsOrders);
+    $smarty->assign('pageTitle', 'Orders');
+
+    loadTemplate($smarty, 'adminHeader');
+    loadTemplate($smarty, 'adminOrders');
+    loadTemplate($smarty, 'adminFooter');
+}
+
+/**
+ * Set order status
+ *
+ */
+function setorderstatusAction(){
+    $itemId = $_POST['itemId'];
+    $status = $_POST['status'];
+
+    if (updateOrderStatus($itemId, $status)){
+        $resData['success'] = 1;
+    } else {
+        $resData['success'] = 0;
+        $resData['message'] = 'Error of setting new status';
+    }
+
+    echo json_encode($resData);
+}
+
+/**
+ * Set Order Date Payment
+ *
+ */
+function setOrderDatePaymentAction(){
+    $itemId = $_POST['itemId'];
+    $datePayment = $_POST['datePayment'];
+
+    if (updateOrderDatePayment($itemId, $datePayment)){
+        $resData['success'] = 1;
+    } else {
+        $resData['success'] = 0;
+        $resData['message'] = 'Error of setting payment date';
+    }
+
+    echo json_encode($resData);
+}

@@ -64,7 +64,7 @@
                 </textarea>
             </td>
             <td>
-                <input type="checkbox" id="itemStatus_{$item['id']}" {if $item['status'] == 0} checked {/if}>{$item['status']}
+                <input type="checkbox" autocomplete="off" id="itemStatus_{$item['id']}" {if $item['status'] == 0} checked {/if}>
             </td>
             <td>
                 {if $item['image']}
