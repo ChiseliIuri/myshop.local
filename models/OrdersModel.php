@@ -14,6 +14,7 @@
  */
 function makeNewOrder ($name, $phone, $address){
     //initializrea variabililor
+    $db = new Db;
     $userId = $_SESSION['user']['id'];
     //trebuie de sanitarizat datele in viitor!!!+++++++++++++++++++++++++++++++++++++++++++++++++++++
     $comment = "User id: {$userId}<br/> Name: {$name}<br/> Phone: {$phone}<br/> Address: {$address}";
@@ -26,10 +27,10 @@ function makeNewOrder ($name, $phone, $address){
     '{$userId}', '{$dateCreated}', '{$comment}', '{$userIp}'
     );
     ";
-    $rs = mysql_query($sql);
+    $rs = mysqli_query($db->connect, $sql);
     $sql = "SELECT LAST_INSERT_ID();";
-    $rs = mysql_query($sql);
-    $id = mysql_fetch_assoc($rs);
+    $rs = mysqli_query($db->connect, $sql);
+    $id = mysqli_fetch_assoc($rs);
     return $id['LAST_INSERT_ID()'];
 }
 
@@ -40,13 +41,14 @@ function makeNewOrder ($name, $phone, $address){
  * @return array masivul comentilor cu legatura spre producte
  */
 function getOrdersWithProductsByUser($userId){
+    $db = new Db;
     $userId = intval($userId);
     $sql = "SELECT * FROM orders
             WHERE user_id = '{$userId}'
             ORDER BY id DESC";
-    $rs = mysql_query($sql);
+    $rs = mysqli_query($db->connect, $sql);
     $smartyRs = array();
-    while ($row = mysql_fetch_assoc($rs)){
+    while ($row = mysqli_fetch_assoc($rs)){
         $rsChildren = getPurchaseForOrder($row['id']);
 
         if ($rsChildren){
@@ -63,14 +65,15 @@ function getOrdersWithProductsByUser($userId){
  * @return array
  */
 function getOrders(){
+    $db = new Db;
     $sql = "SELECT o.*, u.name, u.email, u.phone, u.address
             FROM orders AS o
             LEFT JOIN users AS u ON o.user_id = u.id
             ORDER BY id DESC;";
-    $rs = mysql_query($sql);
+    $rs = mysqli_query($db->connect, $sql);
 
     $smartyRs = array();
-    while($row = mysql_fetch_assoc($rs)){
+    while($row = mysqli_fetch_assoc($rs)){
         $rsChildren = getProductsForOrder($row['id']);
 
         if ($rsChildren){
@@ -88,7 +91,8 @@ function getOrders(){
  * @param $orderId
  */
 function getProductsForOrder($orderId){
-    $rs = mysql_query("
+    $db = new Db;
+    $rs = mysqli_query($db->connect, "
     SELECT *
     FROM purchase as pe
     LEFT JOIN products as ps
@@ -106,8 +110,9 @@ function getProductsForOrder($orderId){
  * @return bool|resource
  */
 function updateOrderStatus($itemId, $status){
+    $db = new Db;
     $status = intval($status);
-    return mysql_query("UPDATE orders 
+    return mysqli_query($db->connect,"UPDATE orders 
             SET `status` = '$status'
             WHERE id = '{$itemId}';");
 }
@@ -120,7 +125,8 @@ function updateOrderStatus($itemId, $status){
  * @return bool|resource
  */
 function updateOrderDatePayment($itemId, $datePayment){
-    return mysql_query("
+    $db = new Db;
+    return mysqli_query($db->connect,"
             UPDATE orders 
             SET `date_payment` = '{$datePayment}'
             WHERE id = '{$itemId}'

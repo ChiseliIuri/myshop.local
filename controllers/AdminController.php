@@ -97,7 +97,7 @@ function updatecategoryAction(){
  */
 
 function productsAction($smarty){
-    $rsCategories = getAllCategories();
+    $rsCategories = getAllChildCategories();
     $rsProducts = getProducts();
 
     $smarty->assign('rsCategories', $rsCategories);

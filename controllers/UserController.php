@@ -181,3 +181,11 @@ function updateAction(){
 
     echo json_encode($resData);
 }
+
+/**
+ * TEST get excel
+ *
+ */
+function getexcelAction(){
+    printExcel();
+}

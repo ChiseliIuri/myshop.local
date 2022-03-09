@@ -15,6 +15,7 @@ function addToCart(itemId) {
                 $('#cartCntItems').html(data['cntItems']);
                 $('#addCart_' + itemId).hide();
                 $('#removeCart_' + itemId).show();
+                document.getElementById('itemCnt_'+itemId).value = 1;
             }
         }
     })
@@ -27,6 +28,7 @@ function addToCart(itemId) {
  * @return in caz de success se reainoiesc datele despre produs pe pagina
  */
 function removeFromCart(itemId) {
+    console.log(itemId);
     $.ajax({
         type: 'POST',
         // async: false,
@@ -37,6 +39,7 @@ function removeFromCart(itemId) {
                 $('#cartCntItems').html(data['cntItems']);
                 $('#addCart_' + itemId).show();
                 $('#removeCart_' + itemId).hide();
+                document.getElementById('itemCnt_'+itemId).value = 0;
             }
         }
     })
@@ -340,11 +343,50 @@ function showProducts(item){
     $("#purchaseForOrderId_" + item).toggle()
 }
 
+/**
+ * Add or delete product item in cart
+ *
+ * @param flag if false then minus, if true then plus
+ * @param itemId
+ * @param itemsIds array with ids of all products
+ */
+function plusMinusButtonAction(itemId, flag, itemsIds){
+    let initialValue = parseInt(document.getElementById('itemCnt_' + itemId).value);
+    console.log(initialValue);
+    if (flag){
+        if (initialValue < 99 && initialValue !== 0 ){
+            document.getElementById('itemCnt_' + itemId).value = initialValue + 1;
+            conversionPrice(itemId);
+            calcGenSum(itemsIds);
+        } else if(initialValue == 0){
+            addToCart(itemId);
+        } else {
+            document.getElementById('itemCnt_' + itemId).value = 99;
+            conversionPrice(itemId);
+            calcGenSum(itemsIds);
+        }
+    } else {
+        if (initialValue == 1){
+            removeFromCart(itemId);
+        } else {
+            document.getElementById('itemCnt_' + itemId).value = initialValue - 1;
+            conversionPrice(itemId);
+            calcGenSum(itemsIds);
+        }
+    }
+}
 
-
-
-
-
+/**
+ * Search of product by string
+ *
+ */
+function searchIt(){
+    let $searchingString = document.getElementById('search').value;
+    let getData = 'string='+$searchingString;
+    if (getData){
+        window.location='/product/search/?'+getData;
+    }
+}
 
 
 

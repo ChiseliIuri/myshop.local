@@ -11,16 +11,18 @@
  * @param array $cart
  * @return boolean TRUE if query was executed with success
  */
-function setPurchaseForOrder($orderId, $cart){
+function setPurchaseForOrder($orderId, $cart)
+{
+    $db = new Db;
     $sql = "INSERT INTO purchase (order_id, product_id, price, amount)
             VALUES";
     $values = array();
     //formam masivul de stringuri pentru query pentru fiecare produs
-    foreach($cart as $item){
+    foreach ($cart as $item) {
         $values[] = "('{$orderId}', '{$item['id']}', '{$item['price']}', '{$item['cnt']}')";
     }
-    $sql .= implode($values, ', ');
-    $rs = mysql_query($sql);
+    $sql .= implode(', ', $values);
+    $rs = mysqli_query($db->connect, $sql);
 
     return $rs;
 }
@@ -31,7 +33,9 @@ function setPurchaseForOrder($orderId, $cart){
  * @param $orderId
  * @return array array of products
  */
-function getPurchaseForOrder($orderId){
+function getPurchaseForOrder($orderId)
+{
+    $db = new Db;
     $sql = "
         SELECT `pe`.*, `ps`.name
         FROM purchase as `pe`
@@ -39,11 +43,11 @@ function getPurchaseForOrder($orderId){
         ON pe.product_id = ps.id
         WHERE pe.order_id = {$orderId};
     ";
-    $rs = mysql_query($sql);
+    $rs = mysqli_query($db->connect, $sql);
 
     $purchases = array();
-    while($row = mysql_fetch_assoc($rs)){
-        $purchases[]= $row;
+    while ($row = mysqli_fetch_assoc($rs)) {
+        $purchases[] = $row;
     }
     return $purchases;
 }

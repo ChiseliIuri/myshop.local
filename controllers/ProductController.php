@@ -42,3 +42,25 @@ function indexAction($smarty)
     loadTemplate($smarty, 'product');
     loadTemplate($smarty, 'footer');
 }
+
+/**
+ * Functionalul cautarii
+ *
+ */
+
+function searchAction($smarty){
+    $string = $_GET['string'] ?? null;
+    $string = htmlspecialchars($string);
+
+    $rsCategories = getAllCatsWithChildren();
+    $rsProducts = findThisFuckingProduct($string);
+
+    $smarty->assign('rsCategories', $rsCategories);
+    $smarty->assign('rsFoundProducts', $rsProducts);
+    $smarty->assign('head', 'MyShop');
+    $smarty->assign('findPageTitle', 'Finds for ' . $string);
+
+    loadTemplate($smarty, 'header');
+    loadTemplate($smarty, 'search');
+    loadTemplate($smarty, 'footer');
+}

@@ -13,7 +13,6 @@
         <td><input type="edit" id="newItemName" value=""></td>
         <td><input type="edit" id="newItemPrice" value=""></td>
         <td><select id="newItemCatId">
-                <option value="0">Main Category
                 {foreach $rsCategories as $itemCat}
                     <option value="{$itemCat['id']}">{$itemCat['name']}
                 {/foreach}
@@ -52,7 +51,6 @@
             </td>
             <td>
                 <select id="itemCatId_{$item['id']}">
-                    <option value="0">Main category
                     {foreach $rsCategories as $itemCat}
                         <option value="{$itemCat['id']}" {if $item['category_id'] == $itemCat['id']}selected="selected"{/if}>{$itemCat['name']}
                     {/foreach}
