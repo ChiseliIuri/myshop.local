@@ -1,0 +1,299 @@
+
+a:link {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+td {
+    padding: 10px;
+}
+
+body{
+    padding: 0;
+}
+
+a:hover{
+    color: #8c8ec9 !important;
+}
+
+#leftColumn a{
+    color: #7a7d82;
+}
+
+#homeBtt a{
+    color: white;
+}
+
+[class^="product-card"]:hover {
+    transition: .3s ease-in-out;
+    transform: scale(1.01);
+    box-shadow: 0px 0px 10px silver;
+}
+
+.product-card{
+    text-align: center;
+    /*border-radius: 20px;*/
+}
+
+.hideme{
+    display: none;
+}
+
+#header-background{
+    z-index: 100;
+    position: sticky;
+    background-color: #36474f;
+       color: white;
+    box-shadow: 0px 5px 10px #36474f;
+    min-width: 1320px;
+    top: 0;
+}
+
+#search-block{
+    display: flex;
+    justify-content: center;
+    flex-grow: 3;
+    flex-direction: row;
+    max-width: 100%;
+    margin-right: 10px;
+    margin-left: 15px;
+}
+
+#search{
+    border-radius: 5px;
+    margin-top: 20px;
+    height: 30px;
+    max-width: 700px;
+    width: 100%;
+}
+
+#search_btt{
+    background: url(/images/icons/search.png);
+    margin-top: 15px;
+    margin-left: 5px;
+    height: 35px;
+    width: 35px;
+}
+
+[id$="search_btt"]:hover {
+    transition: .1s ease-in-out;
+    transform: scale(1.05);
+    /*box-shadow: 0px 0px 10px silver;*/
+}
+
+#header-elements{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    position: sticky;
+    min-width: 1320px;
+    top: 0;
+}
+
+
+#reg-cart{
+    display: flex;
+    align-items: flex-end;
+}
+
+#homeBtt{
+    display: flex;
+    padding-left: 10px;
+    padding-top: 10px;
+    align-content: center;
+}
+
+#left-center{
+    padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#leftColumn{
+    border-right: solid 1px silver;
+    justify-content: stretch;
+    max-height: 100%;
+    width: 200px;
+}
+
+#leftMenu{
+    padding-bottom: 20px;
+}
+
+#menuBorder{
+    margin: 20px;
+}
+
+
+#leftMenu{
+    /*border-right: solid 1px silver;*/
+    width: 210px;
+}
+
+#registerBox{
+}
+
+.registerBox{
+    display: flex;
+    margin-right: 20px;
+    align-self: center;
+}
+
+#loginBox{
+
+}
+
+.loginBox{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-right: 20px;
+    height: 70px;
+    align-content: center;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#userBox {
+    align-self: center;
+    margin: 0 20px 0 20px;
+}
+
+#loginBox > input {
+    margin: 0 5px 0 5px;
+}
+
+#loginBox-order{
+
+}
+
+#centerColumnContainer{
+    /*border: solid 1px silver;*/
+    /*border-radius: 5px;*/
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-left: 70px;
+}
+
+#centerColumnContainer > * {
+    border: none;
+    margin: 20px 30px 20px 30px;
+}
+
+#footer-container{
+    border-top: 1px solid silver;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 50px;
+}
+
+#footer1{
+    /*flex-grow: 1;*/
+    max-width: 200px;
+    text-align: center;
+    align-self: center;
+}
+
+#footer2{
+    font-size: 16px;
+    flex-grow: 3;
+    text-align: center;
+    align-self: center;
+}
+
+#footer3{
+    max-width: 200px;
+    text-align: center;
+    align-self: center;
+}
+
+.menuCaption{
+    padding: 3px;
+    font-weight: bold;
+}
+
+#cartContainer{
+    margin-right: 20px;
+    display: flex;
+    /*flex-direction: column;*/
+    padding: 3px;
+    font-weight: bold;
+    align-self: center;
+}
+
+#loginBox> * {
+    border: none;
+    border-radius: 10px;
+}
+
+.cartBox{
+    padding: 5px 0px 5px 0px
+}
+
+#registerBoxHidden {
+    display: none;
+}
+
+#registerBoxHidden > *{
+    padding-bottom: 5px;
+}
+
+.showHidden{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.tr {
+    border-bottom: solid 1px !important;
+}
+
+#plus{
+    width: 25px;
+    height: 25px;
+    background: url(/images/icons/plus_minus.gif) 0 0;
+}
+
+#minus{
+    width: 25px;
+    height: 25px;
+    background: url(/images/icons/plus_minus.gif) 25px 0px;
+}
+
+#cos{
+    width: 27px;
+    height: 25px;
+    background: url(/images/icons/cos2.png);
+}
+
+.plusMinusLink{
+    display: inline-block;
+    width: 25px;
+    height: 25px
+}
+
+#user-container{
+    flex-direction: column;
+}
+
+#user-container h2{
+    border-bottom: 1px solid silver;
+}
+
+.product_table {
+    background-color: #ffedb9;
+}
+
+#findItemsBox{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#findItemsBox > *{
+    margin: 20px 30px 20px 30px;
+}
