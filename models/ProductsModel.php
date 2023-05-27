@@ -164,3 +164,14 @@ function findThisFuckingProduct(string $string){
     $result = mysqli_query($db, $sql);
     return createSmartyRsArray($result);
 }
+
+/**
+ * Delete product data by id
+ *
+ * @param $prodId product id
+ */
+function deleteProductById ($prodId) {
+    $db = new Db;
+    $sql = "DELETE FROM products WHERE id = '{$prodId}'";
+    return mysqli_query($db->connect ,$sql);
+}

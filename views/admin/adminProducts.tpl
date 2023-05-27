@@ -35,12 +35,13 @@
         <th>Price</th>
         <th>Category</th>
         <th>Description</th>
-        <th>Delete</th>
+        <th>Hide</th>
         <th>Picture</th>
         <th>Save</th>
+        <th>Delete</th>
     </tr>
     {foreach $rsProducts as $item name=products}
-        <tr>
+        <tr id="{$item['id']}">
             <td>{$smarty.foreach.products.iteration}</td>
             <td>{$item['id']}</td>
             <td>
@@ -76,6 +77,9 @@
             </td>
             <td>
                 <input type="button" value="Save" onclick="updateProduct('{$item['id']}');">
+            </td>
+            <td>
+                <input style="color:red;" type="button" value="Complitelly Delete" onclick="destroyProduct('{$item['id']}');">
             </td>
         </tr>
     {/foreach}

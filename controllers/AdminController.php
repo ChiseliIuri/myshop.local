@@ -240,3 +240,27 @@ function setorderdatePaymentAction(){
 
     echo json_encode($resData);
 }
+
+function destroycategoryAction() {
+    $catId = intval($_POST['catId']);
+    if (deleteCategoryById($catId)) {
+        $resData['success'] = 1;
+        $resData['message'] = 'Category Successfully deleted';
+    } else {
+        $resData['success'] = 0;
+        $resData['message'] = 'Stoto ne tac uioba';
+    }
+    echo json_encode($resData);
+}
+
+function destroyproductAction() {
+    $prodId = intval($_POST['prodId']);
+    if (deleteProductById($prodId)) {
+        $resData['success'] = 1;
+        $resData['message'] = 'Product Successfully deleted';
+    } else {
+        $resData['success'] = 0;
+        $resData['message'] = 'Stoto ne tac uioba';
+    }
+    echo json_encode($resData);
+}

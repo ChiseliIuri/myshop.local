@@ -87,6 +87,7 @@ function addProduct(){
                 $('#newItemCatId').val('')
                 $('#newItemDesc').val('')
             }
+            window.location = "http://localhost/admin/products/";
         }
     })
 }
@@ -179,6 +180,46 @@ function updateDatePayment(itemId){
         dataType: 'json',
         success: function(data){
             if(!data['success']){
+                alert(data['message'])
+            }
+        }
+    })
+}
+
+function deleteCat(catId){
+    let postData = {catId: catId}
+
+    $.ajax({
+        type: 'POST',
+        async: false,
+        url: '/admin/destroycategory/',
+        data: postData,
+        dataType: 'json',
+        success: function(data){
+            if(!data['success']){
+                alert(data['message'])
+            } else {
+                document.getElementById(catId).style.display = 'none';
+                alert(data['message'])
+            }
+        }
+    })
+}
+
+function destroyProduct(prodId){
+    let postData = {prodId: prodId}
+
+    $.ajax({
+        type: 'POST',
+        async: false,
+        url: '/admin/destroyproduct/',
+        data: postData,
+        dataType: 'json',
+        success: function(data){
+            if(!data['success']){
+                alert(data['message'])
+            } else {
+                document.getElementById(prodId).style.display = 'none';
                 alert(data['message'])
             }
         }

@@ -8,7 +8,7 @@
         <th>Action</th>
     </tr>
     {foreach $rsCategories as $item name=categories}
-        <tr>
+        <tr id="{$item['id']}">
             <td>{$smarty.foreach.categories.iteration}</td>
             <td>{$item['id']}</td>
             <td><input type="edit" id="itemName_{$item['id']}" value="{$item['name']}" ></td>

@@ -89,10 +89,10 @@ function getAllMainCategories(){
 function insertCat($catName, $catParentId = 0){
     $db = new Db;
     $sql = "INSERT INTO categories (parent_id, name) VALUES ('$catParentId', '$catName');";
-
-    if(mysqli_query($db->connect ,$sql)) {
+    $connect = $db->connect;
+    if(mysqli_query($connect ,$sql)) {
         $sql = "SELECT LAST_INSERT_ID();";
-        $rs = mysqli_query($sql);
+        $rs = mysqli_query($connect, $sql);
 
         return mysqli_fetch_assoc($rs);
     } else {
@@ -142,5 +142,16 @@ function updateCategoryData($itemId, $parentId = -1, $newName = ''){
             SET {$setStr}
             WHERE id = '{$itemId}'";
 
+    return mysqli_query($db->connect ,$sql);
+}
+
+/**
+ * Delete category data
+ *
+ * @param $catId categoty id
+ */
+function deleteCategoryById ($catId) {
+    $db = new Db;
+    $sql = "DELETE FROM categories WHERE id = '{$catId}'";
     return mysqli_query($db->connect ,$sql);
 }
