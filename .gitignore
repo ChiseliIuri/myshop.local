@@ -1,4 +1,5 @@
 **.idea
 .gitignore
-www/templates/bootstrap-5.1.3-dist
 pwdaccess
+vendor
+www/vendor

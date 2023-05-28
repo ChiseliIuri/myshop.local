@@ -30,7 +30,7 @@ define('TEMPLATE_ADMIN_WEB_PATH',"templates/{$templateAdmin}");
 
 //>Initializarea sablonului Smarty
 //put full path to Smarty.class.php
-require('../library/Smarty/libs/Smarty.class.php');
+require('../vendor/smarty/smarty/libs/Smarty.class.php');
 $smarty = new Smarty();
 
 //$smarty->setTemplateDir(TEMPLATE_PREFIX);
