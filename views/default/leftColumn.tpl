@@ -24,28 +24,30 @@
             <a href="#" id="userLink"></a><br/>
             <a href="#" onclick="logout();">Exit</a>
         </div>
-        <div id="loginBox">
-            <div class="menuCaption">Autorizare</div>
-            <input type="text" id="loginEmail" name="loginEmail" value="" placeholder="mail"/><br/>
-            <input type="password" id="loginPwd" name="loginPwd" value="" placeholder="pass"/><br/>
-            <input type="button" onclick="login();" value="Log in">
-        </div>
-        <div id="registerBox">
-            <div class="menuCaption showHidden" onclick="showRegisterBox()">
-                Inregistrare
-{*                <input type="button" onclick="showRegisterBox()" value="Inregistrare">*}
-{*                <a href="#" onclick="showRegisterBox()">Inregistrare</a>*}
+        {if !isset($hideLoginBox)}
+            <div id="loginBox">
+                <div class="menuCaption">Autorizare</div>
+                <input type="text" id="loginEmail" name="loginEmail" value="" placeholder="mail"/><br/>
+                <input type="password" id="loginPwd" name="loginPwd" value="" placeholder="pass"/><br/>
+                <input type="button" onclick="login();" value="Log in">
             </div>
-            <div id="registerBoxHidden" >
-                email:<br/>
-                <input type="text" id="email" name="email" value="" onchange="validateEmail();"/><br/>
-                password:<br/>
-                <input type="password" id="pwd1" name="pwd1" value="" onchange="validatePwd();"/><br/>
-                repeat password:<br/>
-                <input type="password" id="pwd2" name="pwd2" value="" onchange="validatePwdMatch();"/><br/>
-                <input type="button" onclick="registerNewUser();" value="Inregistreazama!"/><br/>
+            <div id="registerBox">
+                <div class="menuCaption showHidden" onclick="showRegisterBox()">
+                    Inregistrare
+                    {*                <input type="button" onclick="showRegisterBox()" value="Inregistrare">*}
+                    {*                <a href="#" onclick="showRegisterBox()">Inregistrare</a>*}
+                </div>
+                <div id="registerBoxHidden">
+                    email:<br/>
+                    <input type="text" id="email" name="email" value="" onchange="validateEmail();"/><br/>
+                    password:<br/>
+                    <input type="password" id="pwd1" name="pwd1" value="" onchange="validatePwd();"/><br/>
+                    repeat password:<br/>
+                    <input type="password" id="pwd2" name="pwd2" value="" onchange="validatePwdMatch();"/><br/>
+                    <input type="button" onclick="registerNewUser();" value="Inregistreazama!"/><br/>
+                </div>
             </div>
-        </div>
+        {/if}
     {/if}
 
     <div class="menuCaption;">Корзина</div>

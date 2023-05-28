@@ -23,7 +23,8 @@ if (isset($_SESSION['user'])){
 }
 //Initializam variabila smarty ce contine versiunea aleatorie pentru incarcarea instantanee a css fileului
 $smarty->assign('rand', rand());
+//Initializa variabila ce contine anul curent pentru footerul siteului
+$smarty->assign('year',date('Y'));
 //initializam variabila shablonizatorului care contine cantitatea de elemente in cos
 $smarty->assign('cartCntItems', count($_SESSION['cart']));
-
 loadPage($smarty, $controllerName, $actionName);

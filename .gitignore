@@ -1,5 +1,5 @@
 **.idea
-/www/test.php,
-/www/study.js
-/www/templates/rep/bootstrap-5.1.3-dist
 .gitignore
+pwdaccess
+vendor
+www/vendor

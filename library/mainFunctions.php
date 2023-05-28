@@ -46,18 +46,36 @@ function debug($value = null, $die = 1){
  *Преобразование результата работы функции выборки в ассоциативный массив
  *
  * @param $rs
- * @return array|mixed
+ * @return array
  */
 function createSmartyRsArray($rs){
 
     if(! $rs) return false;
 
     $smartyRs = array();
-    while ($row = mysql_fetch_assoc($rs)){
+    while ($row = mysqli_fetch_assoc($rs)){
         $smartyRs[] = $row;
     }
     return $smartyRs;
 }
+
+
+/**
+ *Преобразование результата работы функции выборки в ассоциативный массив с PDO
+ *
+ * @param $rs
+ * @return array
+ */
+function createSmartyRsArrayPDO($stmt){
+    $result = array();
+    try {
+        $result[] = $stmt->fetchAll();
+        return $result;
+    } catch (PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
 /**
  * Redirect
  *
@@ -69,8 +87,18 @@ function redirect($url){
     exit;
 }
 
-
-
+/**
+ * Implementation of mysql_field_name in mysqli
+ *
+ * @param $result
+ * @param $field_offset
+ * @return null
+ */
+function mysqli_field_name($result, $field_offset)
+{
+    $properties = mysqli_fetch_field_direct($result, $field_offset);
+    return is_object($properties) ? $properties->name : null;
+}
 
 
 
