@@ -14,7 +14,7 @@
  * @param string $actionName denumirea functiei de prelucrare a paginii
 */
 function loadPage($smarty, $controllerName, $actionName = 'index'){
-    include_once PathPrefix . $controllerName . PathPostfix;
+    include_once ConstConfig::CONTROLLER_PATH_PREFIX . $controllerName . ConstConfig::CONTROLLER_PATH_POSTFIX;
     $function = $actionName . 'Action';
     $function($smarty);
 }
@@ -26,7 +26,7 @@ function loadPage($smarty, $controllerName, $actionName = 'index'){
  * @param string $templateName denumirea file-ului sablonului
  */
 function loadTemplate($smarty, $templateName){
-    $smarty->display($templateName . TEMPLATE_POSTFIX);
+    $smarty->display($templateName . ConstConfig::TEMPLATE_POSTFIX);
 }
 
 /**

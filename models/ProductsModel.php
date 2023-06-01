@@ -1,11 +1,10 @@
 <?php
-
 /**
  * Model pentru tabela products
  *
  */
-
-/**
+class ProductsModel extends MainModel{
+    /**
  * Intoarce ultimele producte inregistrate in limita data. daca nu este indicata limita intoarce toate productele
  * in ordine de la ultimul.
  *
@@ -13,7 +12,6 @@
  * @return array|false|mixed masiv de producte
  */
 function getLastProduct($limit = null){
-    $db = new Db;
     $sql = 'SELECT * FROM products
             WHERE status = 1
             ORDER BY id DESC';
@@ -21,7 +19,7 @@ function getLastProduct($limit = null){
     if ($limit){
         $sql .= " LIMIT ".intval($limit);
     }
-    $rs = mysqli_query($db->connect ,$sql);
+    $rs = mysqli_query(this->db->connect ,$sql);
     return createSmartyRsArray($rs);
 }
 
@@ -175,3 +173,8 @@ function deleteProductById ($prodId) {
     $sql = "DELETE FROM products WHERE id = '{$prodId}'";
     return mysqli_query($db->connect ,$sql);
 }
+
+}
+
+
+

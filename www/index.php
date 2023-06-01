@@ -2,12 +2,26 @@
 header("Cache-Control: no-cache, no-store,  must-revalidate");
 session_start();
 
+// require __DIR__ . '\vendor\autoload.php';
+
+spl_autoload_register (function ($class) {
+    if (str_contains($class, 'Controller')) {
+        include_once "../controllers/" . $class . '.php';
+    } else if (str_contains($class, 'Model')){
+        include_once "../models/" . $class . '.php';
+    } else if (str_contains($class, 'Config')){
+        include_once "../config/" . $class . '.php';
+    } else if (str_ends_with($class, 'Smarty')){
+        include_once "../vendor/smarty/smarty/libs/" . $class . ".class.php";
+    }
+});
+
 //initializam variabila cosului
 if(! isset($_SESSION['cart'])){
     $_SESSION['cart'] = array();
 }
-include_once '../config/config.php'; //initializarea setarilor
-include_once '../config/db.php';
+include_once '../config/ProjectConfig.php'; //initializarea setarilor
+include_once '../config/DbConfig.php';
 include_once '../library/mainFunctions.php'; //Functii principale
 
 //indicam cu ce controller vom lucra
