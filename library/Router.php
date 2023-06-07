@@ -5,11 +5,19 @@ use JetBrains\PhpStorm\NoReturn;
 class Router {
     function loadPage($smarty, $controllerName, $actionName = 'index'): void
     {
-        $controllerName = ucfirst($controllerName);
-        $controllerName = $controllerName . ConstConfig::CONTROLLER_POSTFIX;
-        $controller = new $controllerName();
-        $function = $actionName . 'Action';
-        $controller->$function($smarty);
+        if ($controllerName == "Admin") {
+            $controllerName = ucfirst($controllerName);
+            $controllerName = $controllerName . ConstConfig::CONTROLLER_POSTFIX;
+            $controller = new $controllerName($smarty);
+            $function = $actionName . 'Action';
+            $controller->$function();
+        } else {
+            $controllerName = ucfirst($controllerName);
+            $controllerName = $controllerName . ConstConfig::CONTROLLER_POSTFIX;
+            $controller = new $controllerName();
+            $function = $actionName . 'Action';
+            $controller->$function($smarty);
+        }
     }
     static function redirect($url){
         if(!$url) $url = '/';

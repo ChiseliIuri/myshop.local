@@ -77,7 +77,7 @@ class OrdersModel
 
         $smartyRs = array();
         while ($row = mysqli_fetch_assoc($rs)) {
-            $rsChildren = getProductsForOrder($row['id']);
+            $rsChildren = $this->getProductsForOrder($row['id']);
 
             if ($rsChildren) {
                 $row['children'] = $rsChildren;
@@ -102,7 +102,7 @@ class OrdersModel
     ON pe.product_id = ps.id
     WHERE (`order_id` = $orderId);
     ");
-        return createSmartyRsArray($rs);
+        return Data::createSmartyRsArray($rs);
     }
 
     /**

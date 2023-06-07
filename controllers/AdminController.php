@@ -18,23 +18,25 @@ class AdminController
     private Object $category;
     private Object $order;
     private Object $product;
-    function __construct(){
+    private Object $smarty;
+    function __construct($smarty){
         $this->category = new CategoriesModel();
         $this->purchase = new PurchaseModel();
         $this->order = new OrdersModel();
         $this->product = new ProductsModel();
+        $this->smarty = $smarty;
+        $this->smarty->setTemplateDir(ConstConfig::TEMPLATE_ADMIN_PREFIX);
+        $this->smarty->assign('templateWebPath', ConstConfig::TEMPLATE_ADMIN_WEB_PATH);
     }
 
-    function indexAction($smarty)
+    function indexAction()
     {
-        $smarty->setTemplateDir(ConstConfig::TEMPLATE_ADMIN_PREFIX);
-        $smarty->assign('templateWebPath', ConstConfig::TEMPLATE_ADMIN_WEB_PATH);
         $rsCategories = $this->category->getAllMainCategories();
-        $smarty->assign('rsCategories', $rsCategories);
-        $smarty->assign('pageTitle', 'ADMINKA');
-        Router::loadTemplate($smarty, 'adminHeader');
-        Router::loadTemplate($smarty, 'admin');
-        Router::loadTemplate($smarty, 'adminFooter');
+        $this->smarty->assign('rsCategories', $rsCategories);
+        $this->smarty->assign('pageTitle', 'ADMINKA');
+        Router::loadTemplate($this->smarty, 'adminHeader');
+        Router::loadTemplate($this->smarty, 'admin');
+        Router::loadTemplate($this->smarty, 'adminFooter');
     }
 
     /**
@@ -65,18 +67,18 @@ class AdminController
      *
      * @param $smarty
      */
-    function categoryAction($smarty)
+    function categoryAction()
     {
         $rsCategories = $this->category->getAllCategories();
         $rsMainCategories = $this->category->getAllMainCategories();
 
-        $smarty->assign('rsCategories', $rsCategories);
-        $smarty->assign('rsMainCategories', $rsMainCategories);
-        $smarty->assign('pageTitle', 'ADMINKA');
+        $this->smarty->assign('rsCategories', $rsCategories);
+        $this->smarty->assign('rsMainCategories', $rsMainCategories);
+        $this->smarty->assign('pageTitle', 'ADMINKA');
 
-        Router::loadTemplate($smarty, 'adminHeader');
-        Router::loadTemplate($smarty, 'adminCategory');
-        Router::loadTemplate($smarty, 'adminFooter');
+        Router::loadTemplate($this->smarty, 'adminHeader');
+        Router::loadTemplate($this->smarty, 'adminCategory');
+        Router::loadTemplate($this->smarty, 'adminFooter');
     }
 
     /**
@@ -109,18 +111,18 @@ class AdminController
      * @param type smarty
      */
 
-    function productsAction($smarty)
+    function productsAction()
     {
         $rsCategories = $this->category->getAllChildCategories();
         $rsProducts = $this->product->getProducts();
 
-        $smarty->assign('rsCategories', $rsCategories);
-        $smarty->assign('rsProducts', $rsProducts);
-        $smarty->assign('pageTitle', 'Site Administration');
+        $this->smarty->assign('rsCategories', $rsCategories);
+        $this->smarty->assign('rsProducts', $rsProducts);
+        $this->smarty->assign('pageTitle', 'Site Administration');
 
-        Router::loadTemplate($smarty, 'adminHeader');
-        Router::loadTemplate($smarty, 'adminProducts');
-        Router::loadTemplate($smarty, 'adminFooter');
+        Router::loadTemplate($this->smarty, 'adminHeader');
+        Router::loadTemplate($this->smarty, 'adminProducts');
+        Router::loadTemplate($this->smarty, 'adminFooter');
     }
 
     /**
@@ -209,18 +211,17 @@ class AdminController
     /**
      * Main controller for order page
      *
-     * @param $smarty
      */
-    function ordersAction($smarty)
+    function ordersAction()
     {
         $rsOrders = $this->order->getOrders();
 
-        $smarty->assign('rsOrders', $rsOrders);
-        $smarty->assign('pageTitle', 'Orders');
+        $this->smarty->assign('rsOrders', $rsOrders);
+        $this->smarty->assign('pageTitle', 'Orders');
 
-        Router::loadTemplate($smarty, 'adminHeader');
-        Router::loadTemplate($smarty, 'adminOrders');
-        Router::loadTemplate($smarty, 'adminFooter');
+        Router::loadTemplate($this->smarty, 'adminHeader');
+        Router::loadTemplate($this->smarty, 'adminOrders');
+        Router::loadTemplate($this->smarty, 'adminFooter');
     }
 
     /**
