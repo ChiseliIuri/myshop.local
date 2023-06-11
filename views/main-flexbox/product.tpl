@@ -5,7 +5,7 @@
         <img src="/images/products/{$product['image']}" alt="{$product['image']}"><br/>
         {$product['description']}<br/><br/>
         PRICE: <span style="color: red;">{$product['price']}</span> LEI<br/><br/><br/>
-        <a href="#" alt="Удалить из корзины"
+        <a href="#" alt="Șterge din coș"
            {if ! $itemCart}class ="hideme"{/if}
            id="removeCart_{$product['id']}"
            onclick="removeFromCart({$product['id']}); return false;"
@@ -14,9 +14,9 @@
            text-decoration: none;
            background-color: red;
            padding: 20px">
-            Удалить из корзины
+            Șterge din coș
         </a>
-        <a href="#" alt="Добавить в корзину"
+        <a href="#" alt="Adaugă în coș"
            {if $itemCart}class ="hideme"{/if}
            id="addCart_{$product['id']}"
            onclick="addToCart({$product['id']}); return false;"
@@ -25,7 +25,7 @@
            text-decoration: none;
            background-color: silver;
            padding: 20px">
-            Добавить в корзину
+            Adaugă în coș
         </a>
     </div>
 {else}

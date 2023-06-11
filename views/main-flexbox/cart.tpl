@@ -1,20 +1,20 @@
 {*Шаблон корзины*}
 <div id="cart-main">
-    <h1 style="border-bottom: solid 1px silver;">Корзина</h1>
+    <h1 style="border-bottom: solid 1px silver;">Cosul</h1>
 
     {if ! $rsProducts}
-        Вкорзине пусто
+        Cosul este gol
     {else}
         <form action="/cart/order/" method="POST">
-            <h2>Данные заказа</h2>
+            <h2>Datele comenzii</h2>
             <table>
                 <tr>
                     <td>№</td>
-                    <td>Наименование</td>
-                    <td>Количество</td>
-                    <td>Цена за единицу</td>
-                    <td>Цена</td>
-                    <td>Действие</td>
+                    <td>Denumirea</td>
+                    <td>Cantitatea</td>
+                    <td>Pret unitate</td>
+                    <td>Pret</td>
+                    <td>Actiune</td>
                 </tr>
                 {foreach $rsProducts as $item name = products}
                     <tr>
@@ -52,7 +52,7 @@
                 {/foreach}
                 <tr bgcolor="silver">
                     <td>
-                        Итог
+                        Total
                     </td>
                     <td align="right" colspan="4">
                         <div id="genSum">
