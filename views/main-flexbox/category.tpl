@@ -1,6 +1,6 @@
 <div id="catConteiner">
     <div style="border-bottom: solid 1px silver; margin-bottom: 50px">
-        <h3>Товары Категории {$cat['name']}</h3>
+        <h3>Produsele Categoriei {$cat['name']}</h3>
     </div>
     <div>
         {foreach $rsProducts as $item name = products}
