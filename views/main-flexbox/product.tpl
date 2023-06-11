@@ -4,7 +4,7 @@
         <h3>{$product['name']}</h3>
         <img src="/images/products/{$product['image']}" alt="{$product['image']}"><br/>
         {$product['description']}<br/><br/>
-        PRICE: <span style="color: red;">{$product['price']}</span> RUB<br/><br/><br/>
+        PRICE: <span style="color: red;">{$product['price']}</span> LEI<br/><br/><br/>
         <a href="#" alt="Удалить из корзины"
            {if ! $itemCart}class ="hideme"{/if}
            id="removeCart_{$product['id']}"
