@@ -214,7 +214,7 @@ class UsersModel
         $sep = "\t"; //tabbed character
         //start of printing column names as names of MySQL fields
         for ($i = 0; $i < mysqli_num_fields($result); $i++) {
-            echo mysqli_field_name($result, $i) . "\t";
+            echo Data::mysqli_field_name($result, $i) . "\t";
         }
         print("\n");
 //end of printing column names
